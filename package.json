@@ -1,0 +1,32 @@
+{
+  "name": "modella-collector",
+  "version": "0.0.1",
+  "description": "Modella plugin to enable collection attributes",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "make test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/dawicorti/modella-collector"
+  },
+  "keywords": [
+    "modella",
+    "collection",
+    "collectible",
+    "collector"
+  ],
+  "author": "David Corticchiato",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dawicorti/modella-collector/issues"
+  },
+  "homepage": "https://github.com/dawicorti/modella-collector",
+  "devDependencies": {
+    "mocha": "^1.18.2",
+    "modella": "^0.2.8"
+  }
+}
