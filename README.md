@@ -6,6 +6,7 @@
 
 ```js
 var modella = require('modella');
+var collector = require('modella-collector');
 
 var Disc = modella('Disc')
   .attr('artist', {type: 'string'})
