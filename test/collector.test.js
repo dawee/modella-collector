@@ -26,8 +26,8 @@ describe('collector', function () {
         artist: 'Metallica'
       }]});
 
-      assert.equal('Metallica', fan.get('discs')[0].artist());
-      assert.equal('Black Album', fan.get('discs')[0].name());
+      assert.equal('Metallica', fan.get('discs').get(0).artist());
+      assert.equal('Black Album', fan.get('discs').get(0).name());
     });
 
     it('should preserve instances', function () {
@@ -37,8 +37,8 @@ describe('collector', function () {
         artist: 'Metallica'
       }, dookie]});
 
-      assert.equal('Green Day', fan.get('discs')[1].artist());
-      assert.equal('Dookie', fan.get('discs')[1].name());
+      assert.equal('Green Day', fan.get('discs').get(1).artist());
+      assert.equal('Dookie', fan.get('discs').get(1).name());
     });
 
   });
@@ -59,8 +59,18 @@ describe('collector', function () {
         name: 'Black Album',
         artist: 'Metallica'
       }]})
-      assert.equal('Metallica', fan.get('discs')[0].artist());
-      assert.equal('Black Album', fan.get('discs')[0].name());
+      assert.equal('Metallica', fan.get('discs').get(0).artist());
+      assert.equal('Black Album', fan.get('discs').get(0).name());
+    });
+
+    it('should be able to empty the collection', function () {
+      var fan = new Fan({discs: [{
+        name: 'Black Album',
+        artist: 'Metallica'
+      }]});
+
+      fan.set({discs: []});
+      assert.equal(0, fan.get('discs').size());
     });
 
   });
@@ -72,8 +82,8 @@ describe('collector', function () {
       fan.get('discs')
         .add({name: 'Black Album', artist: 'Metallica'});
 
-      assert.equal('Metallica', fan.get('discs')[0].artist());
-      assert.equal('Black Album', fan.get('discs')[0].name());
+      assert.equal('Metallica', fan.get('discs').get(0).artist());
+      assert.equal('Black Album', fan.get('discs').get(0).name());
     });    
 
     it('should be chainable', function () {
@@ -83,8 +93,8 @@ describe('collector', function () {
         .add({name: 'Black Album', artist: 'Metallica'})
         .add({name: 'Smash', artist: 'The Offsprings'});
 
-      assert.equal('The Offsprings', fan.get('discs')[1].artist());
-      assert.equal('Smash', fan.get('discs')[1].name());
+      assert.equal('The Offsprings', fan.get('discs').get(1).artist());
+      assert.equal('Smash', fan.get('discs').get(1).name());
     });    
 
   });
