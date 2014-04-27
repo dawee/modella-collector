@@ -26,8 +26,8 @@ describe('collector', function () {
         artist: 'Metallica'
       }]});
 
-      assert.equal('Metallica', fan.discs()[0].artist());
-      assert.equal('Black Album', fan.discs()[0].name());
+      assert.equal('Metallica', fan.get('discs')[0].artist());
+      assert.equal('Black Album', fan.get('discs')[0].name());
     });
 
     it('should preserve instances', function () {
@@ -37,8 +37,8 @@ describe('collector', function () {
         artist: 'Metallica'
       }, dookie]});
 
-      assert.equal('Green Day', fan.discs()[1].artist());
-      assert.equal('Dookie', fan.discs()[1].name());
+      assert.equal('Green Day', fan.get('discs')[1].artist());
+      assert.equal('Dookie', fan.get('discs')[1].name());
     });
 
   });
@@ -59,11 +59,60 @@ describe('collector', function () {
         name: 'Black Album',
         artist: 'Metallica'
       }]})
-      assert.equal('Metallica', fan.discs()[0].artist());
-      assert.equal('Black Album', fan.discs()[0].name());
+      assert.equal('Metallica', fan.get('discs')[0].artist());
+      assert.equal('Black Album', fan.get('discs')[0].name());
     });
 
+  });
 
+  describe('add', function () {
+    it('should cast models', function () {
+      var fan = new Fan({name: 'David'});
+
+      fan.get('discs')
+        .add({name: 'Black Album', artist: 'Metallica'});
+
+      assert.equal('Metallica', fan.get('discs')[0].artist());
+      assert.equal('Black Album', fan.get('discs')[0].name());
+    });    
+
+    it('should be chainable', function () {
+      var fan = new Fan({name: 'David'});
+
+      fan.get('discs')
+        .add({name: 'Black Album', artist: 'Metallica'})
+        .add({name: 'Smash', artist: 'The Offsprings'});
+
+      assert.equal('The Offsprings', fan.get('discs')[1].artist());
+      assert.equal('Smash', fan.get('discs')[1].name());
+    });    
+
+  });
+
+  describe('first', function () {
+    it('should retreive the first element', function () {
+      var fan = new Fan({name: 'David'});
+
+      fan.get('discs')
+        .add({name: 'Black Album', artist: 'Metallica'})
+        .add({name: 'Smash', artist: 'The Offsprings'});
+
+      assert.equal('Metallica', fan.get('discs').first().artist());
+      assert.equal('Black Album', fan.get('discs').first().name());
+    });    
+  });
+
+  describe('last', function () {
+    it('should retreive the last element', function () {
+      var fan = new Fan({name: 'David'});
+
+      fan.get('discs')
+        .add({name: 'Black Album', artist: 'Metallica'})
+        .add({name: 'Smash', artist: 'The Offsprings'});
+
+      assert.equal('The Offsprings', fan.get('discs').last().artist());
+      assert.equal('Smash', fan.get('discs').last().name());
+    });    
   });
 
 });

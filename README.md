@@ -8,7 +8,7 @@
 var modella = require('modella');
 var collector = require('modella-collector');
 
-var Disc = modella('Disc')
+var Disc = modella('Disc')œ
   .attr('artist', {type: 'string'})
   .attr('name', {type: 'string'});
 
@@ -25,5 +25,5 @@ var jack = new Fan({
   ]
 });
 
-console.log(jack.discs()[0].artist()); // "The Beatles"
+console.log(jack.discs().first().artist()); // "The Beatles"
 ```

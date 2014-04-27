@@ -7,17 +7,18 @@ var collector = module.exports = function (Model) {
   var setter = Model.prototype.set;
 
   var formatCollections = function (attrs) {
-    Object.keys(attrs).forEach(function (key) {
-      if (!colAttrs.hasOwnProperty(key)) return;
+    Object.keys(colAttrs).forEach(function (key) {
+      if (!attrs.hasOwnProperty(key)) return;
 
       attrs[key] = Collection({
         content: attrs[key],
         model: colAttrs[key]
       });
+
     });
   };
 
-  Model.on('initializing', function (instance, attrs) {
+  Model.once('initializing', function (instance, attrs) {
     Object.keys(Model.attrs).forEach(function (key) {
       var spec = Model.attrs[key];
 
@@ -25,8 +26,14 @@ var collector = module.exports = function (Model) {
         colAttrs[key] = spec.type[0];
       }
     });
+  });
 
-    formatCollections(attrs); 
+  Model.on('initialize', function (instance) {
+    Object.keys(colAttrs).forEach(function (key) {
+      instance.attrs[key] = instance.attrs[key] || [];
+    });
+
+    formatCollections(instance.attrs);
   });
 
   Model.prototype.set = function (attrs) {
