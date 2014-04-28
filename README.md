@@ -7,7 +7,7 @@
 ```js
 var modella = require('modella');
 var Child = modella('Child').attr('name');
-var Mom = modella('Mom').attr('children', {type: [Child]});
+var Mom = modella('Mom').attr('children', {type: [Child]}).use(collector);
 
 var mom = new Dad({children: [
   {name: 'Pete'}, // Collection models can be initialized with data
@@ -16,32 +16,6 @@ var mom = new Dad({children: [
 ```
 
 _This plugin is inspired by [this discussion](https://github.com/modella/modella/issues/24)_
-
-## Usage
-
-```js
-var modella = require('modella');
-var collector = require('modella-collector');
-
-var Disc = modella('Disc')
-  .attr('artist', {type: 'string'})
-  .attr('name', {type: 'string'});
-
-var Fan = modella('Fan')
-  .attr('name', {type: 'string'})
-  .attr('discs', {type: [Disc]})
-  .use(collector);
-
-var jack = new Fan({
-  name: 'Jack',
-  discs: [
-    {artist: 'The Beatles', name: 'Sgt. Pepper\'s Lonely Hearts Club Band'},
-    {artist: 'The Who', name: 'My Generation'}
-  ]
-});
-
-console.log(jack.discs().first().artist()); // "The Beatles"
-```
 
 ## Playing with Collections
 
