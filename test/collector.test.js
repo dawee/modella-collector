@@ -125,4 +125,27 @@ describe('collector', function () {
     });    
   });
 
+  describe('toJSON', function () {
+    it('should returns an array of items\' jsons', function () {
+      var fan = new Fan({name: 'David'});
+
+      fan.get('discs')
+        .add({name: 'Black Album', artist: 'Metallica'})
+        .add({name: 'Smash', artist: 'The Offsprings'});
+
+      assert.equal('Metallica', fan.get('discs').toJSON()[0].artist);
+    });
+
+    it('should be in collection json', function () {
+      var fan = new Fan({name: 'David'});
+
+      fan.get('discs')
+        .add({name: 'Black Album', artist: 'Metallica'})
+        .add({name: 'Smash', artist: 'The Offsprings'});
+
+      assert.equal('Metallica', fan.toJSON().discs[0].artist);
+    });
+
+  });
+
 });
