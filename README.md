@@ -9,7 +9,7 @@ var modella = require('modella');
 var Child = modella('Child').attr('name');
 var Mom = modella('Mom').attr('children', {type: [Child]}).use(collector);
 
-var mom = new Dad({children: [
+var mom = new Mom({children: [
   {name: 'Pete'}, // Collection models can be initialized with data
   new Child({name: 'jack'}) // or with instance
 ]});
